@@ -10,5 +10,8 @@ def mostrarherramientas(request):
 def mostrarinicio(request):
     return render(request,'InicioSeccion_Registro.html')
 
+def mostrarolvido(request):
+    return render(request,'olvidocontraseña.html')
+
 def mostrarcarrito(request):
     return render(request,'carrito.html')

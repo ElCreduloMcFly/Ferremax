@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario Actual</title>
+    <!-- Agrega un enlace al archivo CSS de inventario actual -->
+  
+    <link rel="stylesheet" href="{% static 'css/inventarioAct.css' %}">
+</head>
+<body>
+    <header>
+        <nav id="cssmenu">
+            <div class="logo">
+                <a href="index.html">
+                    Ferremas-Vendedor
+                </a>
+            </div>
+
+            <div id="head-mobile"></div>
+            <div class="button"></div>
+
+            <ul>
+                <li>
+                    <a href="javascript:void(0);">
+                        Gestión de pedidos
+                    </a>
+
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);">
+                                Aprobar o rechazar pedidos
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0);">
+                        Coordinación de Despachos
+                    </a>
+
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);">
+                                Enviar órdenes a bodegueros
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                Organizar el despacho a clientes
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0);">
+                        Inventario
+                    </a>
+
+                    <ul>
+                        <li>
+                            <a href="inventarioAct.html">
+                                Ver inventario actual
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Agregaredidos.html">
+                                Agregar nuevo producto al inventario
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                Editar producto del inventario
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1> Inventario actual </h1>
+
+    <div class="container">
+        <div class="body-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel z-depth-1">
+                        <div class="panel-content">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table id="dataTable" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Articulo</th>
+                                                    <th>Categoria</th>
+                                                    <th>Precio</th>
+                                                    <th>Descripción</th>
+                                                    <th>Cantidad disponible</th>
+                                                    <th>Acciones</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Aquí comienza la fila de datos -->
+                                                <tr>
+                                                    
+                                                    <td>Taladro eléctrico</td>
+                                                    <td>Herramientas eléctricas</td>
+                                                    <td>1234</td>
+                                                    <td>Un taladro eléctrico de alta potencia.</td>
+                                                    <td>50</td>
+                                                   
+                                                    <td>
+                                                        <button class="btn btn-default">Editar</button>
+                                                        <button class="btn btn-danger">Remover</button>
+                                                    </td>
+                                                </tr>
+                                                <!-- Repite esta estructura para cada fila de datos -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para editar un producto
+        function editarProducto(id) {
+            // Aquí puedes agregar la lógica para editar el producto con el ID proporcionado
+            alert("Editar producto con ID: " + id);
+        }
+
+        // Función para eliminar un producto
+        function eliminarProducto(id) {
+            // Aquí puedes agregar la lógica para eliminar el producto con el ID proporcionado
+            alert("Eliminar producto con ID: " + id);
+        }
+    </script>
+</body>
+</html>
+
