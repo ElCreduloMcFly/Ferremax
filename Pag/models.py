@@ -4,12 +4,12 @@ from django.db import models
 
 class rol(models.Model):
     id_rol = models.AutoField(primary_key = True)
-    nombre_rol = models.CharField(max_length= 30) 
+    nombre_rol = models.CharField(max_length= 40) 
 
 
 class pregunta(models.Model): 
     id_preg = models.AutoField(primary_key = True)
-    nombre_preg = models.CharField(max_length= 30) 
+    nombre_preg = models.CharField(max_length= 50) 
 
 
 class categoria(models.Model): 
@@ -22,7 +22,7 @@ class proveedor(models.Model):
     nombre_prov = models.CharField(max_length= 50)
     direccion_prov = models.CharField(max_length= 50)
     correo = models.CharField(max_length= 50) 
-    teléfono = models.IntegerField() 
+    telefono = models.IntegerField() 
 
 # Tablas con 1 llave Foranea
 
