@@ -54,11 +54,24 @@
         <div class="row">
             <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="https://baumart.cl/wp-content/uploads/2024/02/martillo-inoxcrom.webp" alt="martillo">
+                    <img class="card-img-top" src="https://baumart.cl/wp-content/uploads/2024/02/martillo-inoxcrom.webp" alt="martillo" onclick="showDetails('details-Martillo')">
                     <div class="card-block">
                         <h4 class="card-title">Martillo</h4>
                         <p class="card-text">Precio: $2.000</p>
                         <a href="#" data-name="Martillo" data-price="2000" class="add-to-cart btn btn-primary">Agregar al carrito</a>
+
+                        <!-- Detalles adicionales ocultos por defecto -->
+                        <button class="rounded-circle btn btn-warning" onclick="showDetails('details-Martillo')" data-details="details-Martillo">+</button>
+                        <br>
+                        <div class="additional-details" id="details-Martillo" style="display: none;">
+                            <!-- Agrega aquí los detalles adicionales del producto -->
+                            <p>Martillo que martilla muy bien muy bueno para clavar clavos. Pablito clavó el clavito con este martillo</p>
+                            <div class="quantity-buttons">
+                                <button onclick="decreaseQuantity('quantity-Martillo')" class="rounded-circle btn btn-warning">-</button>
+                                <input type="number" id="quantity-Martillo" value="1" min="1" class="form-control">
+                                <button onclick="increaseQuantity('quantity-Martillo')" class="rounded-circle btn btn-warning">+</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,6 +82,18 @@
                         <h4 class="card-title">Sierra</h4>
                         <p class="card-text">Precio: $1.000</p>
                         <a href="#" data-name="Sierra" data-price="1000" class="add-to-cart btn btn-primary">Agregar al carrito</a>
+                        <!-- Detalles adicionales ocultos por defecto -->
+                        <button class="rounded-circle btn btn-warning" onclick="showDetails('details-Sierra')" data-details="details-Sierra">+</button>
+                        <br>
+                        <div class="additional-details" id="details-Sierra" style="display: none;">
+                            <!-- Agrega aquí los detalles adicionales del producto -->
+                            <p>Sierra para cortar, muy buena me corté un dedo haciendo inventario.</p>
+                            <div class="quantity-buttons">
+                                <button onclick="decreaseQuantity('quantity-Sierra')" class="rounded-circle btn btn-warning">-</button>
+                                <input type="number" id="quantity-Sierra" value="1" min="1" class="form-control">
+                                <button onclick="increaseQuantity('quantity-Sierra')" class="rounded-circle btn btn-warning">+</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,6 +104,18 @@
                         <h4 class="card-title">Pack destornilladores</h4>
                         <p class="card-text">Precio: $5.000</p>
                         <a href="#" data-name="Destornilladores" data-price="5000" class="add-to-cart btn btn-primary">Agregar al carrito</a>
+                        <!-- Detalles adicionales ocultos por defecto -->
+                        <button class="rounded-circle btn btn-warning" onclick="showDetails('details-Destornilladores')" data-details="details-Destornilladores">+</button>
+                        <br>
+                        <div class="additional-details" id="details-Destornilladores" style="display: none;">
+                            <!-- Agrega aquí los detalles adicionales del producto -->
+                            <p>Destornilladores muy buenos para desatornillar tornillos, muy malos para atornillar tornillos.</p>
+                            <div class="quantity-buttons">
+                                <button onclick="decreaseQuantity('quantity-Destornilladores')" class="rounded-circle btn btn-warning">-</button>
+                                <input type="number" id="quantity-Destornilladores" value="1" min="1" class="form-control">
+                                <button onclick="increaseQuantity('quantity-Destornilladores')" class="rounded-circle btn btn-warning">+</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,6 +126,18 @@
                         <h4 class="card-title">Carro Herramientas</h4>
                         <p class="card-text">Precio: $35.000</p>
                         <a href="#" data-name="Carro" data-price="35000" class="add-to-cart btn btn-primary">Agregar al carrito</a>
+                        <!-- Detalles adicionales ocultos por defecto -->
+                        <button class="rounded-circle btn btn-warning" onclick="showDetails('details-Carro')" data-details="details-Carro">+</button>
+                        <br>
+                        <div class="additional-details" id="details-Carro" style="display: none;">
+                            <!-- Agrega aquí los detalles adicionales del producto -->
+                            <p>Carro para guardar cosas, no carro de la feria.</p>
+                            <div class="quantity-buttons">
+                                <button onclick="decreaseQuantity('quantity-Carro')" class="rounded-circle btn btn-warning">-</button>
+                                <input type="number" id="quantity-Carro" value="1" min="1" class="form-control">
+                                <button onclick="increaseQuantity('quantity-Carro')" class="rounded-circle btn btn-warning">+</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -99,6 +148,18 @@
                         <h4 class="card-title">Pack dremel</h4>
                         <p class="card-text">Precio: $17.000</p>
                         <a href="#" data-name="Dremel" data-price="17000" class="add-to-cart btn btn-primary">Agregar al carrito</a>
+                        <!-- Detalles adicionales ocultos por defecto -->
+                        <button class="rounded-circle btn btn-warning" onclick="showDetails('details-Dremel')" data-details="details-Dremel">+</button>
+                        <br>
+                        <div class="additional-details" id="details-Dremel" style="display: none;">
+                            <!-- Agrega aquí los detalles adicionales del producto -->
+                            <p>No sé que hace un dremel pero si parece un torno para hacer las uñas.</p>
+                            <div class="quantity-buttons">
+                                <button onclick="decreaseQuantity('quantity-Dremel')" class="rounded-circle btn btn-warning">-</button>
+                                <input type="number" id="quantity-Dremel" value="1" min="1" class="form-control">
+                                <button onclick="increaseQuantity('quantity-Dremel')" class="rounded-circle btn btn-warning">+</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,6 +170,18 @@
                         <h4 class="card-title">Alicate punta curva</h4>
                         <p class="card-text">Precio: $2.500</p>
                         <a href="#" data-name="Alicatecurva" data-price="2500" class="add-to-cart btn btn-primary">Agregar al carrito</a>
+                        <!-- Detalles adicionales ocultos por defecto -->
+                        <button class="rounded-circle btn btn-warning" onclick="showDetails('details-Alicatecurva')" data-details="details-Alicatecurva">+</button>
+                        <br>
+                        <div class="additional-details" id="details-Alicatecurva" style="display: none;">
+                            <!-- Agrega aquí los detalles adicionales del producto -->
+                            <p>No tengo idea que podrias hacer con esto aparte de sacar muelas.</p>
+                            <div class="quantity-buttons">
+                                <button onclick="decreaseQuantity('quantity-Alicatecurva')" class="rounded-circle btn btn-warning">-</button>
+                                <input type="number" id="quantity-Alicatecurva" value="1" min="1" class="form-control">
+                                <button onclick="increaseQuantity('quantity-Alicatecurva')" class="rounded-circle btn btn-warning">+</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,6 +192,18 @@
                         <h4 class="card-title">Taladro</h4>
                         <p class="card-text">Precio: $19.000</p>
                         <a href="#" data-name="Taladro" data-price="19000" class="add-to-cart btn btn-primary">Agregar al carrito</a>
+                        <!-- Detalles adicionales ocultos por defecto -->
+                        <button class="rounded-circle btn btn-warning" onclick="showDetails('details-Taladro')" data-details="details-Taladro">+</button>
+                        <br>
+                        <div class="additional-details" id="details-Taladro" style="display: none;">
+                            <!-- Agrega aquí los detalles adicionales del producto -->
+                            <p>Taladro para taladrar, no sé que más podrias hacer con el.</p>
+                            <div class="quantity-buttons">
+                                <button onclick="decreaseQuantity('quantity-Taladro')" class="rounded-circle btn btn-warning">-</button>
+                                <input type="number" id="quantity-Taladro" value="1" min="1" class="form-control">
+                                <button onclick="increaseQuantity('quantity-Taladro')" class="rounded-circle btn btn-warning">+</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -129,6 +214,18 @@
                         <h4 class="card-title">Escalera 5 peldaños</h4>
                         <p class="card-text">Precio: $40.000</p>
                         <a href="#" data-name="escalera5" data-price="40000" class="add-to-cart btn btn-primary">Agregar al carrito</a>
+                        <!-- Detalles adicionales ocultos por defecto -->
+                        <button class="rounded-circle btn btn-warning" onclick="showDetails('details-escalera5')" data-details="details-escalera5">+</button>
+                        <br>
+                        <div class="additional-details" id="details-escalera5" style="display: none;">
+                            <!-- Agrega aquí los detalles adicionales del producto -->
+                            <p>Escalera para alturas pequeñas, muy pocos escalones no la compre.</p>
+                            <div class="quantity-buttons">
+                                <button onclick="decreaseQuantity('quantity-escalera5')" class="rounded-circle btn btn-warning">-</button>
+                                <input type="number" id="quantity-escalera5" value="1" min="1" class="form-control">
+                                <button onclick="increaseQuantity('quantity-escalera5')" class="rounded-circle btn btn-warning">+</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -164,6 +261,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{% static 'javascript/carritoprincipal.js' %}"></script>
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 
 </html>

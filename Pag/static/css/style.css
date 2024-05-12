@@ -19,17 +19,12 @@ body {
   font-size: var(--size);
   color: var(--primary);
   font-weight: var(--normal);
-  overflow-x: hidden;
 }
 
 .mainContainer {
-  height: 1000px !important;
-  padding: 0 8%;
   background-image: linear-gradient(rgba(59, 59, 59, 0.3), rgba(45, 44, 44, 0.3)),
     url(Fondo.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  overflow: hidden;
+  background-repeat: repeat;
 }
 
 .navbar {
@@ -187,4 +182,23 @@ body {
 /* Estilo para los ítems del menú desplegable al pasar el mouse */
 .dropdown-item:hover {
   background-color: #555; /* Color de fondo al pasar el mouse */
+}
+
+.quantity-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espacio uniforme entre los elementos */
+  max-width: 150px; /* Ajusta el ancho máximo de la barra */
+  margin: auto; /* Centra la barra horizontalmente */
+}
+
+.quantity-buttons button {
+  height: 38px; /* Ajusta la altura de los botones */
+  margin: 0 5px; /* Agrega un margen horizontal entre los botones */
+}
+
+.quantity-buttons input {
+  height: 38px; /* Ajusta la altura del campo de entrada */
+  width: 70px; /* Ajusta el ancho del campo de entrada */
+  text-align: center; /* Centra el texto dentro del campo */
 }
