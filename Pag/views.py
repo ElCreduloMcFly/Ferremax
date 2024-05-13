@@ -15,3 +15,6 @@ def mostrarolvido(request):
 
 def mostrarcarrito(request):
     return render(request,'carrito.html')
+
+def mostrarvendedor(request):
+    return render(request,'inventarioAct.html')
