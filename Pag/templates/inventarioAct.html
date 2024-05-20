@@ -1,128 +1,166 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" ng-app="inventarioApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventario Actual</title>
-    <!-- Agrega un enlace al archivo CSS de inventario actual -->
-  
-    <link rel="stylesheet" href="{% static 'css/inventarioAct.css' %}">
+    <title>Ferremas-Vendedor</title>
+    <link rel="stylesheet" href="{% static 'inventario/inventarioAct.css' %}">
+    <link rel="stylesheet" href="{% static 'inventario/agregar.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        /* Estilos para el modal (splash) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body>
+<body ng-controller="inventarioController">
     <header>
         <nav id="cssmenu">
             <div class="logo">
-                <a href="index.html">
-                    Ferremas-Vendedor
-                </a>
+                <a href="index.html">Ferremas-Vendedor</a>
             </div>
-
             <div id="head-mobile"></div>
             <div class="button"></div>
-
             <ul>
                 <li>
-                    <a href="javascript:void(0);">
-                        Gestión de pedidos
-                    </a>
-
+                    <a href="javascript:void(0);">Gestión de pedidos</a>
                     <ul>
-                        <li>
-                            <a href="javascript:void(0);">
-                                Aprobar o rechazar pedidos
-                            </a>
-                        </li>
+                        <li><a href="javascript:void(0);">Aprobar o rechazar pedidos</a></li>
                     </ul>
                 </li>
-
                 <li>
-                    <a href="javascript:void(0);">
-                        Coordinación de Despachos
-                    </a>
-
+                    <a href="javascript:void(0);">Coordinación de Despachos</a>
                     <ul>
-                        <li>
-                            <a href="javascript:void(0);">
-                                Enviar órdenes a bodegueros
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                Organizar el despacho a clientes
-                            </a>
-                        </li>
+                        <li><a href="javascript:void(0);">Enviar órdenes a bodegueros</a></li>
+                        <li><a href="javascript:void(0);">Organizar el despacho a clientes</a></li>
                     </ul>
                 </li>
-
                 <li>
-                    <a href="javascript:void(0);">
-                        Inventario
-                    </a>
-
+                    <a href="javascript:void(0);">Inventario</a>
                     <ul>
-                        <li>
-                            <a href="inventarioAct.html">
-                                Ver inventario actual
-                            </a>
-                        </li>
-                        <li>
-                            <a href="Agregaredidos.html">
-                                Agregar nuevo producto al inventario
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                Editar producto del inventario
-                            </a>
-                        </li>
+                        <li><a href="inventarioAct.html">Ver inventario actual</a></li>
+                        <li><a href="Agregaredidos.html">Agregar nuevo producto al inventario</a></li>
+                        <li><a href="javascript:void(0);">Editar producto del inventario</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
     </header>
 
-    <h1> Inventario actual </h1>
+    <div class="container-fluid">
+        <div class="row">
+            <h1 class="text-center">Agregar nuevo producto</h1>
+            <div class="col-xs-12 col-sm-6">
+                <form name="formulario" novalidate>
+                    <div class="form-group">
+                        <label for="codigo">Codigo (ID):</label>
+                        <input autocomplete="off" required id="codigo" placeholder="Escribe el Codigo del producto" type="text" class="form-control" ng-model="nuevoProducto.codigo" />
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input autocomplete="off" required id="nombre" placeholder="Escribe el nombre del producto" type="text" class="form-control" ng-model="nuevoProducto.nombre" />
+                    </div>
+                    <div class="form-group">
+                        <label for="precio">Precio:</label>
+                        <input autocomplete="off" required id="precio" placeholder="Escribe el precio del producto" type="number" class="form-control" ng-model="nuevoProducto.precio" />
+                    </div>
+                    <div class="form-group">
+                        <label for="imagen">Imagen:</label>
+                        <input type="file" id="imagen" class="form-control" file-model="nuevoProducto.imagen" />
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea id="descripcion" class="form-control" ng-model="nuevoProducto.descripcion"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad:</label>
+                        <input type="number" id="cantidad" class="form-control" ng-model="nuevoProducto.cantidad" />
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria">Categoría:</label>
+                        <select id="categoria" class="form-control" ng-model="nuevoProducto.categoria">
+                            <option value="Herramientas manuales">Herramientas manuales</option>
+                            <option value="Herramientas eléctricas">Herramientas eléctricas</option>
+                            <option value="Ferretería para construcción">Ferretería para construcción</option>
+                            <option value="Seguridad y protección">Seguridad y protección</option>
+                            <option value="Suministros de jardinería">Suministros de jardinería</option>
+                        </select>
+                    </div>
+                    <button type="button" ng-disabled="formulario.$invalid" ng-click="agregarProducto()" class="btn btn-success form-control">Agregar producto</button>
+                </form>
+            </div>
 
-    <div class="container">
-        <div class="body-content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel z-depth-1">
-                        <div class="panel-content">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="table-responsive">
-                                        <table id="dataTable" class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Articulo</th>
-                                                    <th>Categoria</th>
-                                                    <th>Precio</th>
-                                                    <th>Descripción</th>
-                                                    <th>Cantidad disponible</th>
-                                                    <th>Acciones</th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <!-- Aquí comienza la fila de datos -->
-                                                <tr>
-                                                    
-                                                    <td>Taladro eléctrico</td>
-                                                    <td>Herramientas eléctricas</td>
-                                                    <td>1234</td>
-                                                    <td>Un taladro eléctrico de alta potencia.</td>
-                                                    <td>50</td>
-                                                   
-                                                    <td>
-                                                        <button class="btn btn-default">Editar</button>
-                                                        <button class="btn btn-danger">Remover</button>
-                                                    </td>
-                                                </tr>
-                                                <!-- Repite esta estructura para cada fila de datos -->
-                                            </tbody>
-                                        </table>
+            <div class="col-xs-12 col-sm-6">
+                <h1>Inventario actual</h1>
+                <div class="container">
+                    <div class="body-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel z-depth-1">
+                                    <div class="panel-content">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="table-responsive">
+                                                    <table id="dataTable" class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Codigo(ID)</th>
+                                                                <th>Articulo</th>
+                                                                <th>Precio</th>
+                                                                <th>Descripción</th>
+                                                                <th>Categoría</th>
+                                                                <th>Cantidad disponible</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="producto in productos">
+                                                                <td>{{ producto.codigo }}</td>
+                                                                <td>{{ producto.nombre }}</td>
+                                                                <td>{{ producto.precio }}</td>
+                                                                <td>{{ producto.descripcion }}</td>
+                                                                <td>{{ producto.categoria }}</td>
+                                                                <td>{{ producto.cantidad }}</td>
+                                                                <td>
+                                                                    <button class="btn btn-default" ng-click="editarProducto(producto)">Editar</button>
+                                                                    <button class="btn btn-danger" ng-click="eliminarProducto(producto)">Remover</button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -133,19 +171,98 @@
         </div>
     </div>
 
-    <script>
-        // Función para editar un producto
-        function editarProducto(id) {
-            // Aquí puedes agregar la lógica para editar el producto con el ID proporcionado
-            alert("Editar producto con ID: " + id);
-        }
+    <!-- Modal de edición -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" ng-click="closeModal()">&times;</span>
+            <h2>Editar producto</h2>
+            <form name="editarFormulario" novalidate>
+                <div class="form-group">
+                    <label for="editarPrecio">Precio:</label>
+                    <input autocomplete="off" required id="editarPrecio" placeholder="Escribe el precio del producto" type="number" class="form-control" ng-model="productoSeleccionado.precio" />
+                </div>
+                <div class="form-group">
+                    <label for="editarDescripcion">Descripción:</label>
+                    <textarea id="editarDescripcion" class="form-control" ng-model="productoSeleccionado.descripcion"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editarCantidad">Cantidad:</label>
+                    <input type="number" id="editarCantidad" class="form-control" ng-model="productoSeleccionado.cantidad" />
+                </div>
+                <button type="button" ng-disabled="editarFormulario.$invalid" ng-click="guardarCambios()" class="btn btn-success form-control">Guardar cambios</button>
+            </form>
+        </div>
+    </div>
 
-        // Función para eliminar un producto
-        function eliminarProducto(id) {
-            // Aquí puedes agregar la lógica para eliminar el producto con el ID proporcionado
-            alert("Eliminar producto con ID: " + id);
-        }
+    <script>
+        var app = angular.module('inventarioApp', []);
+
+        app.controller('inventarioController', ['$scope', function($scope) {
+            $scope.productos = [
+                {
+                    codigo: '12434',
+                    nombre: 'Taladro eléctrico',
+                    precio: 1234,
+                    descripcion: 'Un taladro eléctrico de alta potencia.',
+                    categoria: 'Herramientas eléctricas',
+                    cantidad: 50
+                }
+                // Puedes añadir más productos aquí si lo deseas
+            ];
+
+            $scope.nuevoProducto = {};
+
+            $scope.agregarProducto = function() {
+                // Aquí puedes añadir lógica adicional como validaciones o procesamiento de la imagen
+                if ($scope.nuevoProducto.imagen) {
+                    // Procesamiento de la imagen
+                }
+                $scope.productos.push(angular.copy($scope.nuevoProducto));
+                $scope.nuevoProducto = {}; // Limpiar el formulario
+            };
+
+            $scope.editarProducto = function(producto) {
+        // Asigna el producto seleccionado para la edición
+        $scope.productoSeleccionado = producto;
+        // Muestra el modal de edición
+        document.getElementById('editModal').style.display = "block";
+    };
+
+    $scope.closeModal = function() {
+        // Cierra el modal de edición
+        document.getElementById('editModal').style.display = "none";
+    };
+
+    $scope.guardarCambios = function() {
+        // Aquí se debería implementar la lógica para guardar los cambios del producto
+        // Una vez que la lógica esté implementada, se puede cerrar el modal
+        $scope.closeModal();
+    };
+
+            $scope.eliminarProducto = function(producto) {
+                var index = $scope.productos.indexOf(producto);
+                if (index > -1) {
+                    $scope.productos.splice(index, 1);
+                }
+            };
+        }]);
+
+        app.directive('fileModel', ['$parse', function($parse) {
+            return {
+                restrict: 'A',
+                link: function(scope, element, attrs) {
+                    var model = $parse(attrs.fileModel);
+                    var modelSetter = model.assign;
+
+                    element.bind('change', function() {
+                        scope.$apply(function() {
+                            modelSetter(scope, element[0].files[0]);
+                        });
+                    });
+                }
+            };
+        }]);
     </script>
 </body>
 </html>
-
+ 
