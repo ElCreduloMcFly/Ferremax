@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="es" ng-app="inventarioApp">
 <head>
     <meta charset="UTF-8">
@@ -6,8 +7,7 @@
     <title>Ferremas-Vendedor</title>
     <link rel="stylesheet" href="{% static 'css/inventarioAct.css' %}">
     <link rel="stylesheet" href="{% static 'css/agregar.css' %}">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="{% static 'js/inventario.js' %}"></script>
+    
     <style>
         /* Estilos para el modal (splash) */
         .modal {
@@ -54,24 +54,10 @@
             <div class="button"></div>
             <ul>
                 <li>
-                    <a href="javascript:void(0);">Gestión de pedidos</a>
-                    <ul>
-                        <li><a href="javascript:void(0);">Aprobar o rechazar pedidos</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">Coordinación de Despachos</a>
-                    <ul>
-                        <li><a href="javascript:void(0);">Enviar órdenes a bodegueros</a></li>
-                        <li><a href="javascript:void(0);">Organizar el despacho a clientes</a></li>
-                    </ul>
-                </li>
-                <li>
                     <a href="javascript:void(0);">Inventario</a>
                     <ul>
-                        <li><a href="inventarioAct.html">Ver inventario actual</a></li>
-                        <li><a href="Agregaredidos.html">Agregar nuevo producto al inventario</a></li>
-                        <li><a href="javascript:void(0);">Editar producto del inventario</a></li>
+                        <li><a href="{% url 'Vendedor' %}">Ver inventario actual</a></li>
+                        <li><a href="{% url 'MenuPrincipal' %}">Cerrar Sesion</a></li>
                     </ul>
                 </li>
             </ul>
@@ -194,5 +180,10 @@
             </form>
         </div>
     </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="{% static 'js/inventario.js' %}"></script>
+    
 </body>
 </html>

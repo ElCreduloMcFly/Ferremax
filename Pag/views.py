@@ -1,5 +1,10 @@
-from django.shortcuts import render
-from .models import pregunta
+from django.shortcuts import render,redirect
+from .models import pregunta,usuario,rol
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
 
 # Create your views here.
 def mostrarhome(request):
@@ -22,3 +27,63 @@ def mostrarcarrito(request):
 
 def mostrarvendedor(request):
     return render(request,'inventarioAct.html')
+
+def registrar(request):
+    rutU = request.POST['rut']
+    nombreU = request.POST['name']
+    direccionU = request.POST['direccion']
+    correoU = request.POST['correo']
+    contrasenaU = request.POST['password']
+    telefonoU = request.POST['telefono']
+    preguntaU = request.POST['pregunta']
+    respuestaU = request.POST['rs']
+    
+    user = User.objects.create_user(username = correoU,
+                                    email= correoU,
+                                    password= contrasenaU)
+    if "@ferremax.com" in correoU:
+        user.is_staff = True    
+        roluser = rol.objects.get(nombre_rol = "Administrador")
+    else:
+        user.is_staff = False
+        roluser = rol.objects.get(nombre_rol = "Cliente")
+    registroPreg = pregunta.objects.get(id_preg = preguntaU)
+    
+    usuario.objects.create(rut_usu = rutU,nombre_usu = nombreU,correo_usu = correoU,
+                           contrasena_usu = contrasenaU,direccion_usu = direccionU,telefono_usu = telefonoU ,
+                           rol_usu = roluser, id_preg = registroPreg)
+    
+    user.is_active = True
+    user.save()
+    return redirect('Sesion')
+
+def iniciarsesion(request):
+    usuario1 = request.POST['correo']
+    contra1 = request.POST['clave']
+
+    try: 
+        user1 = User.objects.get(username = usuario1)
+    except User.DoesNotExist:
+        messages.error(request, 'El usuario o la contraseña son incorrectas')
+        return render(request,'InicioSeccion_Registro.html')
+
+    pass_valida = check_password(contra1, user1.password)
+    if not pass_valida:
+        messages.error(request, 'El usuario o la contraseña son incorrectas')
+        return render(request,'InicioSeccion_Registro.html')
+
+    usuario2 = usuario.objects.get(correo_usu = usuario1, contrasena_usu= contra1)
+    user = authenticate(username = usuario1, password=contra1)
+
+    if user is not None:
+        login(request, user)
+        if(usuario2.rol_usu.nombre_rol == "Administrador"):
+            return redirect('Vendedor')
+
+        else: 
+            contexto = {"usuario":usuario2}
+
+            return render(request, 'MenuPrincipal.html', contexto)
+
+    else:
+        print("8")  

@@ -19,9 +19,6 @@
                     <a class="nav-link" href="{% url 'Herramientas' %}">Herramientas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#categorias">Categorías</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{% url 'Sesion' %}">Iniciar Sesión</a>
                 </li>
                 <li class="nav-item last">
@@ -33,23 +30,24 @@
     <div class="container" id="container">
         <!--Registro-->
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form action="{% url 'registrar' %}" method="post">
+                {% csrf_token %}
                 <h1>Registrate </h1>
                 <span>Usa tu correo electrónico para registrarte 🤔</span>
-                <input type="text" placeholder="Ingresa tu Nombre " />
-                <input type="text" placeholder="Ingresa tu Dirreción" />
-                <input type="email" placeholder="Ingresa tu Correo electrónico" />
-                <input type="password" placeholder=" Ingresa tu Contraseña" />
-                <input type="password" placeholder="Repetir Contraseña" />
-                
-                <select>
+                <input type="text" name="rut" placeholder="Ingresa tu Rut " />
+                <input type="text" name="name" placeholder="Ingresa tu Nombre " />
+                <input type="text" name="direccion" placeholder="Ingresa tu Dirreción" />
+                <input type="email" name="correo" placeholder="Ingresa tu Correo electrónico" />
+                <input type="number" name="telefono" placeholder="Ingresa tu Telefono " />
+                <input type="password" name="password" placeholder=" Ingresa tu Contraseña" />   
+                <select name="pregunta">
                     <option selected>Selecciona una pregunta de Seguridad</option>
                     {% for pregunta in preguntas %}
                         <option value="{{ pregunta.id_preg }}">{{ pregunta.nombre_preg }}</option>
                     {% endfor %}
                 </select>
                 
-                <input type="text" placeholder="Respuesta de Seguridad " />
+                <input type="text" name="rs" placeholder="Respuesta de Seguridad " />
                 <button>Registrarse </button>
             </form>
              <!--Fin de formulario de Registro-->
@@ -57,14 +55,16 @@
 
          <!--InicioSesion-->
         <div class="form-container sign-in-container">
-            <form action="#">
-                <h1>Iniciar sesión </h1>
-                <span>Usa tu cuenta para iniciar sesión 🤗 </span>
-                <input type="email" placeholder="Correo electrónico" />
-                <input type="password" placeholder="Contraseña" />
-                <a href="olvidocontraseña.html"> ¿Olvidaste tu contraseña?</a>
-                <button>Iniciar seción </button>
-            </form>
+            <form method="post" action="{% url 'iniciarsesion' %}">
+                {% csrf_token %}
+                <h1>Iniciar sesión</h1>
+                <span>Usa tu cuenta para iniciar sesión 🤗</span>
+                <input type="email" name="correo" placeholder="Correo electrónico" required>
+                <input type="password" name="clave" placeholder="Contraseña" required>
+                <a href="olvidocontraseña.html">¿Olvidaste tu contraseña?</a>
+                <button type="submit">Iniciar sesión</button>
+            </form>     
+            
         </div>
         <!--Fin de formulario de InicioSecion-->
 
