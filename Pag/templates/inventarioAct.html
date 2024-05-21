@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/inventarioAct.css' %}">
     <link rel="stylesheet" href="{% static 'css/agregar.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="{% static 'js/inventario.js' %}"></script>
     <style>
         /* Estilos para el modal (splash) */
         .modal {
@@ -193,76 +194,5 @@
             </form>
         </div>
     </div>
-
-    <script>
-        var app = angular.module('inventarioApp', []);
-
-        app.controller('inventarioController', ['$scope', function($scope) {
-            $scope.productos = [
-                {
-                    codigo: '12434',
-                    nombre: 'Taladro eléctrico',
-                    precio: 1234,
-                    descripcion: 'Un taladro eléctrico de alta potencia.',
-                    categoria: 'Herramientas eléctricas',
-                    cantidad: 50
-                }
-                // Puedes añadir más productos aquí si lo deseas
-            ];
-
-            $scope.nuevoProducto = {};
-
-            $scope.agregarProducto = function() {
-                // Aquí puedes añadir lógica adicional como validaciones o procesamiento de la imagen
-                if ($scope.nuevoProducto.imagen) {
-                    // Procesamiento de la imagen
-                }
-                $scope.productos.push(angular.copy($scope.nuevoProducto));
-                $scope.nuevoProducto = {}; // Limpiar el formulario
-            };
-
-            $scope.editarProducto = function(producto) {
-        // Asigna el producto seleccionado para la edición
-        $scope.productoSeleccionado = producto;
-        // Muestra el modal de edición
-        document.getElementById('editModal').style.display = "block";
-    };
-
-    $scope.closeModal = function() {
-        // Cierra el modal de edición
-        document.getElementById('editModal').style.display = "none";
-    };
-
-    $scope.guardarCambios = function() {
-        // Aquí se debería implementar la lógica para guardar los cambios del producto
-        // Una vez que la lógica esté implementada, se puede cerrar el modal
-        $scope.closeModal();
-    };
-
-            $scope.eliminarProducto = function(producto) {
-                var index = $scope.productos.indexOf(producto);
-                if (index > -1) {
-                    $scope.productos.splice(index, 1);
-                }
-            };
-        }]);
-
-        app.directive('fileModel', ['$parse', function($parse) {
-            return {
-                restrict: 'A',
-                link: function(scope, element, attrs) {
-                    var model = $parse(attrs.fileModel);
-                    var modelSetter = model.assign;
-
-                    element.bind('change', function() {
-                        scope.$apply(function() {
-                            modelSetter(scope, element[0].files[0]);
-                        });
-                    });
-                }
-            };
-        }]);
-    </script>
 </body>
 </html>
- 

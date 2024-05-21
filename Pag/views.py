@@ -40,7 +40,7 @@ def agregar_producto(request):
 
 @csrf_exempt
 def modificar_producto(request, id):
-    if request.method == 'POST':
+    if request.method == 'PUT':
         data = json.loads(request.body)
         try:
             producto = producto.objects.get(id_prod=id)
