@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ferremas</title>
 </head>
 <body>
     <!-- MENÚ -->
@@ -41,12 +41,14 @@
                 <input type="email" placeholder="Ingresa tu Correo electrónico" />
                 <input type="password" placeholder=" Ingresa tu Contraseña" />
                 <input type="password" placeholder="Repetir Contraseña" />
-                <select >
-                    <option selected>Seleciona una pregunta de Seguridad</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                
+                <select>
+                    <option selected>Selecciona una pregunta de Seguridad</option>
+                    {% for pregunta in preguntas %}
+                        <option value="{{ pregunta.id_preg }}">{{ pregunta.nombre_preg }}</option>
+                    {% endfor %}
                 </select>
+                
                 <input type="text" placeholder="Respuesta de Seguridad " />
                 <button>Registrarse </button>
             </form>
@@ -61,7 +63,7 @@
                 <input type="email" placeholder="Correo electrónico" />
                 <input type="password" placeholder="Contraseña" />
                 <a href="olvidocontraseña.html"> ¿Olvidaste tu contraseña?</a>
-                <button>Inciar seción </button>
+                <button>Iniciar seción </button>
             </form>
         </div>
         <!--Fin de formulario de InicioSecion-->

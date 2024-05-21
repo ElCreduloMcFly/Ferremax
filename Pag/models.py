@@ -6,10 +6,12 @@ class rol(models.Model):
     id_rol = models.AutoField(primary_key = True)
     nombre_rol = models.CharField(max_length= 40) 
 
+class pregunta(models.Model):
+    id_preg = models.AutoField(primary_key=True)
+    nombre_preg = models.CharField(max_length=50)
 
-class pregunta(models.Model): 
-    id_preg = models.AutoField(primary_key = True)
-    nombre_preg = models.CharField(max_length= 50) 
+    def __str__(self):
+        return self.nombre_preg
 
 
 class categoria(models.Model): 
