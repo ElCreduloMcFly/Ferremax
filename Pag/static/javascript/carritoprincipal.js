@@ -1,153 +1,143 @@
 var shoppingCart = (function() {
-  cart = [];
-  
+  var cart = [];
+
   // Constructor
   function Item(name, price, count) {
     this.name = name;
     this.price = price;
     this.count = count;
   }
-  
-  // guardar carrito
+
+  // Guardar carrito
   function saveCart() {
     sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
   }
-  
-    // cargar carrito
+
+  // Cargar carrito
   function loadCart() {
-    cart = JSON.parse(sessionStorage.getItem('shoppingCart'));
-  }
-  if (sessionStorage.getItem("shoppingCart") != null) {
-    loadCart();
+    cart = JSON.parse(sessionStorage.getItem('shoppingCart')) || [];
   }
 
+  loadCart();
 
   var obj = {};
-  // agregar al carrito
+
+  // Agregar al carrito
   obj.addItemToCart = function(name, price, count) {
-    for(var item in cart) {
-      if(cart[item].name === name) {
-        cart[item].count ++;
-        saveCart();
-        return;
+    var added = false;
+    for (var i in cart) {
+      if (cart[i].name === name) {
+        cart[i].count += count;
+        added = true;
+        break;
       }
     }
-    var item = new Item(name, price, count);
-    cart.push(item);
+    if (!added) {
+      var item = new Item(name, price, count);
+      cart.push(item);
+    }
     saveCart();
-  }
-  // guardar cuenta items
+  };
+
+  // Establecer la cantidad de un ítem
   obj.setCountForItem = function(name, count) {
-    for(var i in cart) {
+    for (var i in cart) {
       if (cart[i].name === name) {
         cart[i].count = count;
         break;
       }
     }
-  };
-  // quitar item del carrito
-  obj.removeItemFromCart = function(name) {
-      for(var item in cart) {
-        if(cart[item].name === name) {
-          cart[item].count --;
-          if(cart[item].count === 0) {
-            cart.splice(item, 1);
-          }
-          break;
-        }
-    }
     saveCart();
-  }
+  };
 
-  // quitar todo del carrito
-  obj.removeItemFromCartAll = function(name) {
-    for(var item in cart) {
-      if(cart[item].name === name) {
-        cart.splice(item, 1);
+  // Quitar un ítem del carrito
+  obj.removeItemFromCart = function(name) {
+    for (var i in cart) {
+      if (cart[i].name === name) {
+        cart[i].count--;
+        if (cart[i].count === 0) {
+          cart.splice(i, 1);
+        }
         break;
       }
     }
     saveCart();
-  }
+  };
 
-  // limpiar carrito
+  // Quitar todos los ítems del carrito
+  obj.removeItemFromCartAll = function(name) {
+    for (var i in cart) {
+      if (cart[i].name === name) {
+        cart.splice(i, 1);
+        break;
+      }
+    }
+    saveCart();
+  };
+
+  // Limpiar carrito
   obj.clearCart = function() {
     cart = [];
     saveCart();
-  }
+  };
 
-  // contar
+  // Contar todos los ítems en el carrito
   obj.totalCount = function() {
     var totalCount = 0;
-    for(var item in cart) {
-      totalCount += cart[item].count;
+    for (var i in cart) {
+      totalCount += cart[i].count;
     }
     return totalCount;
-  }
+  };
 
-  // total carrito
+  // Calcular el total del carrito
   obj.totalCart = function() {
     var totalCart = 0;
-    for(var item in cart) {
-      totalCart += cart[item].price * cart[item].count;
+    for (var i in cart) {
+      totalCart += cart[i].price * cart[i].count;
     }
     return Number(totalCart.toFixed(2));
-  }
+  };
 
-  // lista
+  // Listar el carrito
   obj.listCart = function() {
     var cartCopy = [];
-    for(i in cart) {
-      item = cart[i];
-      itemCopy = {};
-      for(p in item) {
+    for (var i in cart) {
+      var item = cart[i];
+      var itemCopy = {};
+      for (var p in item) {
         itemCopy[p] = item[p];
-
       }
       itemCopy.total = Number(item.price * item.count).toFixed(2);
-      cartCopy.push(itemCopy)
+      cartCopy.push(itemCopy);
     }
     return cartCopy;
-  }
-
-  // cart : Array
-  // Item : Object/Class
-  // addItemToCart : Function
-  // removeItemFromCart : Function
-  // removeItemFromCartAll : Function
-  // clearCart : Function
-  // countCart : Function
-  // totalCart : Function
-  // listCart : Function
-  // saveCart : Function
-  // loadCart : Function
-
-  // agregar al carrito
+  };
 
   return obj;
 })();
 
-// agregar item
+// Evento click para agregar al carrito
 $('.add-to-cart').click(function(event) {
   event.preventDefault();
   var name = $(this).data('name');
   var price = Number($(this).data('price'));
-  var quantity = parseInt($('#quantity-' + name).val());
+  var quantity = parseInt($('#quantity-' + name).val()) || 1; // Asegura que la cantidad sea al menos 1 si no se especifica
   shoppingCart.addItemToCart(name, price, quantity);
   displayCart();
 });
 
-// borrar items
+// Evento click para limpiar el carrito
 $('.clear-cart').click(function() {
   shoppingCart.clearCart();
   displayCart();
 });
 
-
+// Mostrar el carrito
 function displayCart() {
   var cartArray = shoppingCart.listCart();
   var output = "";
-  for(var i in cartArray) {
+  for (var i in cartArray) {
     output += "<tr>"
       + "<td>" + cartArray[i].name + "</td>" 
       + "<td>" + cartArray[i].price + "</td>"
@@ -164,64 +154,66 @@ function displayCart() {
   $('.total-count').html(shoppingCart.totalCount());
 }
 
-// boton borrar item
-
+// Evento click para eliminar un ítem del carrito
 $('.show-cart').on("click", ".delete-item", function(event) {
-  var name = $(this).data('name')
+  var name = $(this).data('name');
   shoppingCart.removeItemFromCartAll(name);
-  displayCart();
-})
-
-
-// -1
-$('.show-cart').on("click", ".minus-item", function(event) {
-  var name = $(this).data('name')
-  shoppingCart.removeItemFromCart(name);
-  displayCart();
-})
-// +1
-$('.show-cart').on("click", ".plus-item", function(event) {
-  var name = $(this).data('name')
-  shoppingCart.addItemToCart(name, 0, 1);
-  displayCart();
-})
-
-// item contar input
-$('.show-cart').on("change", ".item-count", function(event) {
-   var name = $(this).data('name');
-   var count = Number($(this).val());
-  shoppingCart.setCountForItem(name, count);
   displayCart();
 });
 
-displayCart();
+// Evento click para reducir la cantidad de un ítem
+$('.show-cart').on("click", ".minus-item", function(event) {
+  var name = $(this).data('name');
+  shoppingCart.removeItemFromCart(name);
+  displayCart();
+});
 
+// Evento click para aumentar la cantidad de un ítem
+$('.show-cart').on("click", ".plus-item", function(event) {
+  var name = $(this).data('name');
+  shoppingCart.addItemToCart(name, 0, 1); // Asegura que al aumentar sea 1
+  displayCart();
+});
+
+// Evento change para actualizar la cantidad de un ítem
+$('.show-cart').on("change", ".item-count", function(event) {
+   var name = $(this).data('name');
+   var count = Number($(this).val());
+   shoppingCart.setCountForItem(name, count);
+   displayCart();
+});
+
+// Mostrar detalles del producto
 function showDetails(detailsId) {
   var detailsElement = document.getElementById(detailsId);
   if (detailsElement.style.display === "" || detailsElement.style.display === "none") {
-      detailsElement.style.display = "block";
-      // Desplazar la página hacia arriba para que los detalles sean visibles
-      var yOffset = -50; // Ajusta este valor según sea necesario para la posición exacta que deseas
-      var elementPosition = detailsElement.getBoundingClientRect().top;
-      window.scrollTo({
-          top: elementPosition + window.pageYOffset + yOffset,
-          behavior: "smooth"
-      });
+    detailsElement.style.display = "block";
+    var yOffset = -50; // Ajusta este valor según sea necesario
+    var elementPosition = detailsElement.getBoundingClientRect().top;
+    window.scrollTo({
+      top: elementPosition + window.pageYOffset + yOffset,
+      behavior: "smooth"
+    });
   } else {
-      detailsElement.style.display = "none";
+    detailsElement.style.display = "none";
   }
 }
 
+// Función para incrementar la cantidad
 function increaseQuantity(quantityId) {
   var quantityInput = document.getElementById(quantityId);
   var currentValue = parseInt(quantityInput.value);
   quantityInput.value = currentValue + 1;
 }
 
+// Función para decrementar la cantidad
 function decreaseQuantity(quantityId) {
   var quantityInput = document.getElementById(quantityId);
   var currentValue = parseInt(quantityInput.value);
   if (currentValue > 1) {
-      quantityInput.value = currentValue - 1;
+    quantityInput.value = currentValue - 1;
   }
 }
+
+// Mostrar carrito inicialmente al cargar la página
+displayCart();
