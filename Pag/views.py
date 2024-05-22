@@ -27,7 +27,8 @@ def mostrarcarrito(request):
     return render(request,'carrito.html')
 
 def mostrarvendedor(request):
-    return render(request,'inventarioAct.html')
+    productos = producto.objects.all()
+    return render(request,'inventarioAct.html',{'productos':productos})
 
 def mostraragregar(request):
     categorias = categoria.objects.all()
@@ -115,4 +116,9 @@ def agregarproducto(request):
 
     producto.objects.create(imagen=imagenP,nombre_prod=nombreP,descripcion=descP,precio=precioP,stock=stockP,id_categoria=cateescogida)
     return render(request,'inventarioAct.html')
-            
+
+
+def eliminarproducto(request, id_prod):
+        eliminar = producto.objects.get(id_prod = id_prod)
+        eliminar.delete()
+        return redirect('Vendedor')
