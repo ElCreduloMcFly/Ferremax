@@ -34,6 +34,12 @@ def mostraragregar(request):
     categorias = categoria.objects.all()
     return render(request,'addproducto.html',{'categorias':categorias})
 
+def mostrarproducto(request,id_prod):
+    productos = producto.objects.get(id_prod=id_prod)
+    categorias = categoria.objects.all()
+    return render(request,'modificarproducto.html',{'productos':productos,'categorias':categorias})
+
+
 
 #FUNCIONES DEL USUARIO
 
@@ -122,3 +128,26 @@ def eliminarproducto(request, id_prod):
         eliminar = producto.objects.get(id_prod = id_prod)
         eliminar.delete()
         return redirect('Vendedor')
+
+def modificarproducto(request,id_prod):
+
+    imagenP = request.FILES['imagen']
+    nombreP = request.POST['nombre']
+    descP = request.POST['descripcion']
+    precioP = request.POST['precio']
+    stockP = request.POST['stock']
+    categoriaP = request.POST['categoria']
+    cateescogida = categoria.objects.get(id_categoria=categoriaP)
+
+    prod = producto.objects.get(id_prod=id_prod)
+
+    prod.imagen = imagenP
+    prod.nombre_prod = nombreP
+    prod.descripcion = descP
+    prod.precio = precioP
+    prod.stock = stockP
+    prod.id_categoria = cateescogida
+
+    prod.save()
+
+    return redirect('Vendedor')

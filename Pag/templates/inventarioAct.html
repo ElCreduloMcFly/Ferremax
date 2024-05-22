@@ -99,7 +99,7 @@
                                                                 <td>{{ producto.stock }}</td>
                                                                 <td>
                                                                     <button class="btn btn-default">
-                                                                        Editar
+                                                                        <a href="{% url 'mostrarproducto' producto.id_prod %}">Modificar</a>
                                                                     </button>
                                                                     <button class="btn btn-danger">
                                                                         <a href="{% url 'eliminarproducto' producto.id_prod %}">Eliminar</a>
