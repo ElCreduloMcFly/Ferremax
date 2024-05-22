@@ -65,97 +65,32 @@
 
     <div class="container">
         <div class="row">
+            {% for producto in productos %}
             <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="https://baumart.cl/wp-content/uploads/2024/02/martillo-inoxcrom.webp" alt="martillo" onclick="showDetails('details-Martillo')">
+                    <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre_prod }}" onclick="showDetails('details-{{ producto.id_prod }}')">
                     <div class="card-block">
-                        <h4 class="card-title">Martillo</h4>
-                        <p class="card-text">Precio: $2.000</p>
-                        <a href="#" data-name="Martillo" data-price="2000" class="add-to-cart btn btn-primary">Agregar al carrito</a>
-
+                        <h4 class="card-title">{{ producto.nombre_prod }}</h4>
+                        <p class="card-text">Precio: ${{ producto.precio }}</p>
+                        <a href="#" data-name="{{ producto.nombre_prod }}" data-price="{{ producto.precio }}" class="add-to-cart btn btn-primary">Agregar al carrito</a>
+            
                         <!-- Detalles adicionales ocultos por defecto -->
-                        <button class="rounded-circle btn btn-warning" onclick="showDetails('details-Martillo')" data-details="details-Martillo">+</button>
+                        <button class="rounded-circle btn btn-warning" onclick="showDetails('details-{{ producto.id_prod }}')" data-details="details-{{ producto.id_prod }}">+</button>
                         <br>
-                        <div class="additional-details" id="details-Martillo" style="display: none;">
+                        <div class="additional-details" id="details-{{ producto.id_prod }}" style="display: none;">
                             <!-- Agrega aquí los detalles adicionales del producto -->
-                            <p>Martillo que martilla muy bien muy bueno para clavar clavos. Pablito clavó el clavito con este martillo</p>
+                            <p>{{ producto.descripcion }}</p>
                             <div class="quantity-buttons">
-                                <button onclick="decreaseQuantity('quantity-Martillo')" class="rounded-circle btn btn-warning">-</button>
-                                <input type="number" id="quantity-Martillo" value="1" min="1" class="form-control">
-                                <button onclick="increaseQuantity('quantity-Martillo')" class="rounded-circle btn btn-warning">+</button>
+                                <button onclick="decreaseQuantity('quantity-{{ producto.id_prod }}')" class="rounded-circle btn btn-warning">-</button>
+                                <input type="number" id="quantity-{{ producto.id_prod }}" value="1" min="1" class="form-control">
+                                <button onclick="increaseQuantity('quantity-{{ producto.id_prod }}')" class="rounded-circle btn btn-warning">+</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card">
-                    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_U--VD7CFqyPQ4zrtsmE8aVplS_IgASlLzpkHichuag&s" alt="sierra">
-                    <div class="card-block">
-                        <h4 class="card-title">Sierra</h4>
-                        <p class="card-text">Precio: $1.000</p>
-                        <a href="#" data-name="Sierra" data-price="1000" class="add-to-cart btn btn-primary">Agregar al carrito</a>
-                        <!-- Detalles adicionales ocultos por defecto -->
-                        <button class="rounded-circle btn btn-warning" onclick="showDetails('details-Sierra')" data-details="details-Sierra">+</button>
-                        <br>
-                        <div class="additional-details" id="details-Sierra" style="display: none;">
-                            <!-- Agrega aquí los detalles adicionales del producto -->
-                            <p>Sierra para cortar, muy buena me corté un dedo haciendo inventario.</p>
-                            <div class="quantity-buttons">
-                                <button onclick="decreaseQuantity('quantity-Sierra')" class="rounded-circle btn btn-warning">-</button>
-                                <input type="number" id="quantity-Sierra" value="1" min="1" class="form-control">
-                                <button onclick="increaseQuantity('quantity-Sierra')" class="rounded-circle btn btn-warning">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img class="card-img-top" src="https://falabella.scene7.com/is/image/Falabella/113164995_1?wid=800&hei=800&qlt=70" alt="pack destornilladores">
-                    <div class="card-block">
-                        <h4 class="card-title">Pack destornilladores</h4>
-                        <p class="card-text">Precio: $5.000</p>
-                        <a href="#" data-name="Destornilladores" data-price="5000" class="add-to-cart btn btn-primary">Agregar al carrito</a>
-                        <!-- Detalles adicionales ocultos por defecto -->
-                        <button class="rounded-circle btn btn-warning" onclick="showDetails('details-Destornilladores')" data-details="details-Destornilladores">+</button>
-                        <br>
-                        <div class="additional-details" id="details-Destornilladores" style="display: none;">
-                            <!-- Agrega aquí los detalles adicionales del producto -->
-                            <p>Destornilladores muy buenos para desatornillar tornillos, muy malos para atornillar tornillos.</p>
-                            <div class="quantity-buttons">
-                                <button onclick="decreaseQuantity('quantity-Destornilladores')" class="rounded-circle btn btn-warning">-</button>
-                                <input type="number" id="quantity-Destornilladores" value="1" min="1" class="form-control">
-                                <button onclick="increaseQuantity('quantity-Destornilladores')" class="rounded-circle btn btn-warning">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img class="card-img-top" src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS2nOYUydKo1KjDUD-_6GGJQ6-_6_yqBXZhCL_rU4DB4mlXkxFZy_zh3Xn6wOdYqe8Sqx4yHDCVlQKJS0M-p2DFfjczqVc5vFpUBIE3P_jjxz6aKAw1HDjw&usqp=CAE" alt="carro herramientas">
-                    <div class="card-block">
-                        <h4 class="card-title">Carro Herramientas</h4>
-                        <p class="card-text">Precio: $35.000</p>
-                        <a href="#" data-name="Carro" data-price="35000" class="add-to-cart btn btn-primary">Agregar al carrito</a>
-                        <!-- Detalles adicionales ocultos por defecto -->
-                        <button class="rounded-circle btn btn-warning" onclick="showDetails('details-Carro')" data-details="details-Carro">+</button>
-                        <br>
-                        <div class="additional-details" id="details-Carro" style="display: none;">
-                            <!-- Agrega aquí los detalles adicionales del producto -->
-                            <p>Carro para guardar cosas, no carro de la feria.</p>
-                            <div class="quantity-buttons">
-                                <button onclick="decreaseQuantity('quantity-Carro')" class="rounded-circle btn btn-warning">-</button>
-                                <input type="number" id="quantity-Carro" value="1" min="1" class="form-control">
-                                <button onclick="increaseQuantity('quantity-Carro')" class="rounded-circle btn btn-warning">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+            {% endfor %}
+            
 
     <!-- Modal -->
     <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

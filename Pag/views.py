@@ -9,7 +9,8 @@ from django.contrib import messages
 
 # Create your views here.
 def mostrarhome(request):
-    return render(request,'MenuPrincipal.html')
+    productos = producto.objects.all()
+    return render(request,'MenuPrincipal.html',{'productos':productos})
 
 def mostrarherramientas(request):
     return render(request,'herramientas.html')
