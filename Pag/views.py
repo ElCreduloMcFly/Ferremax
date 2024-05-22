@@ -36,6 +36,12 @@ def mostraragregar(request):
     categorias = categoria.objects.all()
     return render(request,'addproducto.html',{'categorias':categorias})
 
+def mostrarnuevotrabajador(request):
+    preguntas = pregunta.objects.all()
+    roles = rol.objects.all()
+    return render(request,'agregar_trabajador.html',{'preguntas':preguntas,'roles':roles})
+
+
 def mostrarproducto(request,id_prod):
     productos = producto.objects.get(id_prod=id_prod)
     categorias = categoria.objects.all()
@@ -60,7 +66,7 @@ def registrar(request):
     if User.objects.filter(email=correoU).exists():
         return render(request, 'correo_registrado.html')  # Renderiza la plantilla con el modal
     
-    
+
     user = User.objects.create_user(username = correoU,
                                     email= correoU,
                                     password= contrasenaU)

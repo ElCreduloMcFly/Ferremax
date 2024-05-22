@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import mostrarhome,mostrarcarrito,mostrarherramientas,mostrarinicio,mostrarvendedor,iniciarsesion,registrar,finsesion,mostraragregar,agregarproducto,eliminarproducto,modificarproducto,mostrarproducto
+from .views import mostrarhome,mostrarcarrito,mostrarherramientas,mostrarinicio,mostrarvendedor,iniciarsesion,registrar,finsesion,mostraragregar,agregarproducto,eliminarproducto,modificarproducto,mostrarproducto,mostrarnuevotrabajador
 
 urlpatterns = [
     path('',mostrarhome,name="MenuPrincipal"),
@@ -9,6 +9,7 @@ urlpatterns = [
     path('Inicio/',mostrarinicio,name="Sesion"),
     path('Vendedor/',mostrarvendedor,name="Vendedor"),
     path('mostrarproducto/',mostraragregar,name="mostrarcategoria"),
+    path('mostrarnuevotrabajador/',mostrarnuevotrabajador,name="mostrarnuevotrabajador"),
     path('iniciarsesion/', iniciarsesion, name='iniciarsesion'),   
     path('registrar/',registrar,name="registrar"),
     path('finsesion/',finsesion, name='finsesion'),

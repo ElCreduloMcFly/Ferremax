@@ -1,10 +1,15 @@
 import json
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.http import JsonResponse
+from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
 from django.apps import apps
 from Pag.models import usuario
+from .serializers import UsuarioSerializer
+from rest_framework.response import Response
 
+#API VERIFICACION DE CORREO
 # Obténgo el modelo de usuario desde la app `Pag`
 User = apps.get_model('Pag', 'usuario')
 
@@ -25,3 +30,14 @@ def chequeo_email(request):
             return JsonResponse({'error': 'Error al decodificar JSON'}, status=400)
     else:
         return JsonResponse({'error': 'Método no permitido'}, status=405)
+    
+
+
+#API DE CREACION DE USUARIOS
+@api_view(['POST'])
+def creausuario(request):
+    serializer = UsuarioSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
