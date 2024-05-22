@@ -109,16 +109,24 @@ select, input {
     margin: 5% auto 0 auto; /* Ajuste de márgenes */
 }
 
-.form-container {
+
+ .form-container {
     position: absolute;
     top: 0;
     height: 100%;
+    width: 100%; /* Ajustar al 100% del contenedor */
+    max-width: 400px; /* Limitar el ancho máximo para evitar que el texto se extienda demasiado */
     transition: all 0.6s ease-in-out;
+    display: flex; /* Usar flexbox para alinear el contenido */
+    flex-direction: column; /* Alinear los elementos en columna */
+    justify-content: center; /* Centrar verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+    text-align: center; /* Centrar el texto */
 }
 
-.sign-in-container, .sign-up-container {
-    left: 0;
-    width: 50%;
+
+.sign-up-container, .sign-in-container {
+    width: 100%; /* Ajustar al 100% del contenedor */
 }
 
 .sign-up-container {
