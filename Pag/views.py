@@ -13,7 +13,8 @@ def mostrarhome(request):
     return render(request,'MenuPrincipal.html',{'productos':productos})
 
 def mostrarherramientas(request):
-    return render(request,'herramientas.html')
+    productos = producto.objects.all()
+    return render(request,'herramientas.html',{'productos':productos})
 
 def mostrarinicio(request):
     preguntas = pregunta.objects.all()
