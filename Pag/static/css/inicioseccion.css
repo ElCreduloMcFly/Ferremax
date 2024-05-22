@@ -8,6 +8,7 @@
 body {
 	background-image: linear-gradient(rgba(247, 176, 96, 0.3), rgba(211, 191, 80, 0.3)),
     url(Fondo.png);
+	display: center;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
