@@ -41,6 +41,9 @@ def mostrarnuevotrabajador(request):
     roles = rol.objects.all()
     return render(request,'agregar_trabajador.html',{'preguntas':preguntas,'roles':roles})
 
+def mostrarmenulogin(request):
+    productos = producto.objects.all()
+    return render(request,'MenuPrincipallogin.html',{'productos':productos})
 
 def mostrarproducto(request,id_prod):
     productos = producto.objects.get(id_prod=id_prod)
@@ -106,13 +109,11 @@ def iniciarsesion(request):
 
     if user is not None:
         login(request, user)
-        if(usuario2.rol_usu.nombre_rol == "Administrador"):
+        if(usuario2.rol_usu.nombre_rol == "Administrador" ):
             return redirect('Vendedor')
 
         else: 
-            contexto = {"usuario":usuario2}
-
-            return render(request, 'MenuPrincipal.html', contexto)
+            return redirect('MenuPrincipalLogin')
 
     else:
         print("8")
