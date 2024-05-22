@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from .models import pregunta,usuario,rol,categoria,producto
 from django.contrib.auth.models import User
@@ -104,21 +105,14 @@ def finsesion(request):
 #ACCIONES ADMINISTRADOR(AGREGAR/MODIFICAR/ELIMINAR PRODUCTOS)
 
 def agregarproducto(request):
-        imagen = request.FILES['imagen']
-        nombre_prod = request.POST['nombre_prod']
-        descripcion = request.POST['descripcion']
-        precio = request.POST['precio']
-        stock = request.POST['stock']
-        categoriaproducto = request.POST['id_categoria']
-        registrocategoria = categoria.objects.get(id_categoria=categoriaproducto)
+    imagenP = request.FILES['imagen']
+    nombreP = request.POST['nombre']
+    descP = request.POST['descripcion']
+    precioP = request.POST['precio']
+    stockP = request.POST['stock']
+    categoriaP = request.POST['categoria']
+    cateescogida = categoria.objects.get(id_categoria=categoriaP)
 
-        producto.objects.create(
-            imagen=imagen,
-            nombre_prod=nombre_prod,
-            descripcion=descripcion,
-            precio=precio,
-            stock=stock,
-            id_categoria=registrocategoria
-        )
-        
-        return render(request,'inventarioAct.html')
+    producto.objects.create(imagen=imagenP,nombre_prod=nombreP,descripcion=descP,precio=precioP,stock=stockP,id_categoria=cateescogida)
+    return render(request,'inventarioAct.html')
+            

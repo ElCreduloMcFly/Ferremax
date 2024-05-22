@@ -67,15 +67,15 @@
     </header>
 
     <h1>Agregar Producto</h1>
-    <form method="post" action="{% url 'agregaproducto' %}" enctype="multipart/form-data">
+    <form method="post" action="{% url 'agregarproducto' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div>
             <label for="imagen">Imagen:</label>
-            <input type="file" id="imagen" name="imagen" required>
+            <input type="file" id="imagen" name="imagen">
         </div>
         <div>
             <label for="nombre_prod">Nombre del Producto:</label>
-            <input type="text" id="nombre_prod" name="nombre_prod" maxlength="30" required>
+            <input type="text" id="nombre_prod" name="nombre" maxlength="30" required>
         </div>
         <div>
             <label for="descripcion">Descripción:</label>
@@ -91,7 +91,7 @@
         </div>
         <div>
             <label for="id_categoria">Categoría:</label>
-            <select id="id_categoria" name="id_categoria" required>
+            <select id="id_categoria" name="categoria" required>
                 {% for categoria in categorias %}
                     <option value="{{ categoria.id_categoria }}">{{ categoria.nombre_categoria }}</option>
                 {% endfor %}
@@ -99,12 +99,6 @@
         </div>
         <button type="submit">Agregar Producto</button>
     </form>
-
-    
-
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     
     
 </body>
