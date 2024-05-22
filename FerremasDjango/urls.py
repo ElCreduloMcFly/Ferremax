@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('Pag.urls')),
+    path('',include('api.urls')),
 ]
 #pip install djangorestframework
 

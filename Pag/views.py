@@ -54,6 +54,12 @@ def registrar(request):
     telefonoU = request.POST['telefono']
     preguntaU = request.POST['pregunta']
     respuestaU = request.POST['rs']
+
+    # Verificar si el correo electrónico ya está registrado
+    
+    if User.objects.filter(email=correoU).exists():
+        return render(request, 'correo_registrado.html')  # Renderiza la plantilla con el modal
+    
     
     user = User.objects.create_user(username = correoU,
                                     email= correoU,

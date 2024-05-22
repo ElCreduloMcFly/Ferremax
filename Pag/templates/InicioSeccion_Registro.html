@@ -24,7 +24,7 @@
     <div class="container" id="container">
         <!--Registro-->
         <div class="form-container sign-up-container">
-            <form action="{% url 'registrar' %}" method="post">
+            <form action="{% url 'registrar' %}" method="post" id="formulario-registro">
                 {% csrf_token %}
                 <h1>Registrate </h1>
                 <span>Usa tu correo electrónico para registrarte 🤔</span>
