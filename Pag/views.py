@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
-from .models import pregunta,usuario,rol
+from .models import pregunta,usuario,rol,categoria,producto
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login , logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 
@@ -27,6 +27,13 @@ def mostrarcarrito(request):
 
 def mostrarvendedor(request):
     return render(request,'inventarioAct.html')
+
+def mostraragregar(request):
+    categorias = categoria.objects.all()
+    return render(request,'addproducto.html',{'categorias':categorias})
+
+
+#FUNCIONES DEL USUARIO
 
 def registrar(request):
     rutU = request.POST['rut']
@@ -86,4 +93,32 @@ def iniciarsesion(request):
             return render(request, 'MenuPrincipal.html', contexto)
 
     else:
-        print("8")  
+        print("8")
+
+def finsesion(request):
+    logout(request)
+    return redirect('MenuPrincipal')  
+
+# FIN ACCIONES USUARIO
+
+#ACCIONES ADMINISTRADOR(AGREGAR/MODIFICAR/ELIMINAR PRODUCTOS)
+
+def agregarproducto(request):
+        imagen = request.FILES['imagen']
+        nombre_prod = request.POST['nombre_prod']
+        descripcion = request.POST['descripcion']
+        precio = request.POST['precio']
+        stock = request.POST['stock']
+        categoriaproducto = request.POST['id_categoria']
+        registrocategoria = categoria.objects.get(id_categoria=categoriaproducto)
+
+        producto.objects.create(
+            imagen=imagen,
+            nombre_prod=nombre_prod,
+            descripcion=descripcion,
+            precio=precio,
+            stock=stock,
+            id_categoria=registrocategoria
+        )
+        
+        return render(request,'inventarioAct.html')
