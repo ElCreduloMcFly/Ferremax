@@ -1,10 +1,15 @@
-{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ferremas</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/inicioseccion.css' %}">
 </head>
 <body>
     <!-- MENÚ -->
@@ -14,15 +19,15 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'Herramientas' %}">Herramientas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'Sesion' %}">Iniciar Sesión</a>
                 </li>
-                <li class="nav-item last">
-                    <a class="nav-link" href="{% url 'Carrito' %}">Carrito <i class="fa-solid fa-cart-shopping" ></i></a> 
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Carrito' %}">Carrito <i class="fa-solid fa-cart-shopping"></i></a>
                 </li>
             </ul>
         </div>
@@ -32,28 +37,26 @@
         <div class="form-container sign-up-container">
             <form action="{% url 'registrar' %}" method="post">
                 {% csrf_token %}
-                <h1>Registrate </h1>
+                <h1>Registrate</h1>
                 <span>Usa tu correo electrónico para registrarte 🤔</span>
-                <input type="text" name="rut" placeholder="Ingresa tu Rut " />
-                <input type="text" name="name" placeholder="Ingresa tu Nombre " />
+                <input type="text" name="rut" placeholder="Ingresa tu Rut" />
+                <input type="text" name="name" placeholder="Ingresa tu Nombre" />
                 <input type="text" name="direccion" placeholder="Ingresa tu Dirreción" />
                 <input type="email" name="correo" placeholder="Ingresa tu Correo electrónico" />
-                <input type="number" name="telefono" placeholder="Ingresa tu Telefono " />
-                <input type="password" name="password" placeholder=" Ingresa tu Contraseña" />   
+                <input type="number" name="telefono" placeholder="Ingresa tu Telefono" />
+                <input type="password" name="password" placeholder="Ingresa tu Contraseña" />
                 <select name="pregunta">
                     <option selected>Selecciona una pregunta de Seguridad</option>
                     {% for pregunta in preguntas %}
                         <option value="{{ pregunta.id_preg }}">{{ pregunta.nombre_preg }}</option>
                     {% endfor %}
                 </select>
-                
-                <input type="text" name="rs" placeholder="Respuesta de Seguridad " />
-                <button>Registrarse </button>
+                <input type="text" name="rs" placeholder="Respuesta de Seguridad" />
+                <button>Registrarse</button>
             </form>
-             <!--Fin de formulario de Registro-->
         </div>
 
-         <!--InicioSesion-->
+        <!--InicioSesion-->
         <div class="form-container sign-in-container">
             <form method="post" action="{% url 'iniciarsesion' %}">
                 {% csrf_token %}
@@ -63,37 +66,34 @@
                 <input type="password" name="clave" placeholder="Contraseña" required>
                 <a href="olvidocontraseña.html">¿Olvidaste tu contraseña?</a>
                 <button type="submit">Iniciar sesión</button>
-            </form>     
-            
+            </form>
         </div>
-        <!--Fin de formulario de InicioSecion-->
 
         <!--Interfaces de Hola contructor-->
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <h1>¡Bienvenido de nuevo, Constructor ! 🔨</h1>
+                    <h1>¡Bienvenido de nuevo, Constructor! 🔨</h1>
                     <p>Para seguir conectado con nuestro mundo de herramientas, por favor inicia sesión con tu información personal.</p>
-                    <button class="ghost" id="signIn">Iniciar seción</button>
+                    <button class="ghost" id="signIn">Iniciar sesión</button>
                 </div>
                 <div class="overlay-panel overlay-right">
-                    <h1>¡ Hola Constructor ! 🔨</h1>
+                    <h1>¡Hola Constructor! 🔨</h1>
                     <p>✨ Tu taller de sueños te espera. ✨</p>
-                    <button class="ghost" id="signUp">¡ Registrate !</button>
+                    <button class="ghost" id="signUp">¡Registrate!</button>
                 </div>
             </div>
         </div>
-        <!-- Fin de Interfaces de Hola contructor-->
     </div>
 
-    <!-- CSS Y JS -->
-    <link rel="stylesheet" href="{% static 'css/inicioseccion.css' %}">
+    <!-- Bootstrap and jQuery scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{% static 'javascript/inicioseccion.js' %}"></script>
 
-    <!-- carrito-->
-
+    <footer>
+        <p>&copy; 2024 Tienda Online. Todos los derechos reservados.</p>
+    </footer>
 </body>
-<footer>
-    <p>&copy; 2024 Tienda Online. Todos los derechos reservados.</p>
-</footer>
 </html>
