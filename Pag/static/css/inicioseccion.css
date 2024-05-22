@@ -8,13 +8,14 @@
 body {
 	background-image: linear-gradient(rgba(247, 176, 96, 0.3), rgba(211, 191, 80, 0.3)),
     url(Fondo.png);
-	display: center;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
 	/*margin: -20px 0 50px; */
+
 }
 
 h1 {
@@ -109,12 +110,15 @@ input {
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
-	position: center;
+	position: relative;
 	overflow: hidden;
 	width: 800px;
 	max-width: 100%;
 	min-height: 590px;
 	margin-top: 5%;
+	display: flex; /* Añade display: flex; */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
 }
 
 .form-container {
